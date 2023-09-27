@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<div class="row">
+
+    <h1> Car Brands</h1>
+    <div class="col-3">
+        <h3> Insert car</h3>
+        <form action="/car_brands" method="POST">
+            <input class="form-control" 
+                name="brand"
+                type="text" 
+                placeholder="e.g. Audi" 
+                aria-label="default input example">
+
+            <button type="submit" class="btn btn-success">ZOEK</button>
+        </form>
+    </div>
+    {% if cars_list is defined %}
+    <div class="col-9">
+        <table class="table table-striped" id="cars_table">
+            <thead>
+                <th>Merk:</th>
+                <th>Model:</th>
+                <th>Prijs:</th>
+            </thead>
+            <tbody>
+                {% for car in cars_list %}
+                <tr>
+                    <td>{{ car.merk }}</td>
+                    <td>{{ car.handelsbenaming }}</td>
+                    <td>{{ car.catalogusprijs }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    {% endif %}
+
+     <!-- JQuery -->
+     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script>
+    $(document).ready( function () {
+            $('#cars_table').DataTable();
+        } );
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+</div>
+
+{% endblock %}
+
+
